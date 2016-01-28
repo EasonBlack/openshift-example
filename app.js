@@ -6,8 +6,11 @@ var dust = require('express-dustjs');
 var router = require('./routes');
 
 var app = express();
-app.listen(3000, function(){
-    console.log('connect success!');
+
+var ipaddress = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
+var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
+app.listen(port, ipaddress, function() {
+     console.log('connect success!');
 });
 
 dust._.optimizers.format = function (ctx, node) {
